@@ -68,11 +68,22 @@
 					<li><a href="#">English</a></li>
 				</ul>
 			</div>
+			<!-- Thay đổi phần hiển thị Login/Logout và giữ lại Đăng ký shop -->
 			<div class="header__top__right__auth">
-				<a href="${pageContext.request.contextPath}/login"><i
-					class="fa fa-user"></i> Login</a>
-
+				<c:choose>
+					<c:when test="${not empty sessionScope.account}">
+						<a href="${pageContext.request.contextPath}/logout"><i
+							class="fa fa-user"></i> Logout</a>
+					</c:when>
+					<c:otherwise>
+						<a href="${pageContext.request.contextPath}/login"><i
+							class="fa fa-user"></i> Login</a>
+					</c:otherwise>
+				</c:choose>
+				<a href="${URL_PRIMARY}register-shop" class="ml-2"><i
+					class="fa fa-shopping-bag"></i> Đăng ký shop</a>
 			</div>
+
 		</div>
 		<nav class="humberger__menu__nav mobile-menu">
 			<ul>
@@ -92,17 +103,22 @@
 		</div>
 		<div class="humberger__menu__contact">
 			<ul>
-				<li class="nav-item"><c:choose>
-						<c:when test="${sessionScope.account == null}">
-							<a class="nav-link"
-								href="${pageContext.request.contextPath}/login">Đăng nhập</a>
-						</c:when>
+				<c:choose>
+					<c:when test="${not empty sessionScope.account}">
+						<li><i class="fa fa-envelope"></i>
+							${sessionScope.account.email}</li>
+					</c:when>
+					<c:otherwise>
+						<li><i class="fa fa-envelope"></i> hello@uteshop.com</li>
+					</c:otherwise>
+				</c:choose>
 
-					</c:choose></li>
+
 				<li>Miễn phí ship cho đơn hàng từ 150k</li>
 			</ul>
 		</div>
 	</div>
+
 	<!-- Humberger End -->
 
 	<!-- Header Section Begin -->
@@ -157,8 +173,9 @@
 											class="fa fa-user"></i> Login</a>
 									</c:otherwise>
 								</c:choose>
-								<a href="${URL_PRIMARY}register-shop" class="ml-2"><i
-									class="fa fa-shopping-bag"></i> Đăng ký shop</a>
+								<a href="${URL_PRIMARY}register-shop" class="ml-2"><iclass
+										="fafa-shopping-bag">
+									</i> Đăng ký shop</a>
 							</div>
 
 						</div>
