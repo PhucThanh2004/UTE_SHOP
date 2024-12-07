@@ -20,4 +20,8 @@ public class ShopServiceImpl implements IShopService {
     public ShopModel findByAccountId(int accountId) throws Exception {
         return shopDao.findByAccountId(accountId);
     }
+	@Override
+	public ShopModel findByShopId(int shopId) throws Exception {
+		return shopDao.findByShopId(shopId);
+	}
 }

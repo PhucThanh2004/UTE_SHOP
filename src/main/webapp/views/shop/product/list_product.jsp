@@ -4,7 +4,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex justify-content-between">
         <h4 class="m-0 font-weight-bold text-primary">Danh sách sản phẩm</h4>
-        <a href="${pageContext.request.contextPath}/shop/product/add-product" class="btn btn-primary">Thêm mới</a>
+        <a href="${pageContext.request.contextPath}/shop/product/add-product?id=${shop}" class="btn btn-primary">Thêm mới</a>
     </div>
     <div class="card-body">
         <div class="table-responsive">

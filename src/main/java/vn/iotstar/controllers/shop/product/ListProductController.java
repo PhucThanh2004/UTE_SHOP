@@ -6,8 +6,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.iotstar.models.ProductModel;
+import vn.iotstar.models.ShopModel;
 import vn.iotstar.service.IProductService;
+import vn.iotstar.service.IShopService;
 import vn.iotstar.service.impl.ProductServiceImpl;
+import vn.iotstar.service.impl.ShopServiceImpl;
 import vn.iotstar.utils.Constant;
 
 import java.io.IOException;
@@ -18,15 +21,34 @@ public class ListProductController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private IProductService productService;
+    private IShopService shopService;
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         productService = new ProductServiceImpl();
+        shopService = new ShopServiceImpl();
+        
         int page = Integer.parseInt(req.getParameter("page") != null ? req.getParameter("page") : "1");
         int pageSize = 10;
-
-        int shopId = 4; //co the lay theo account login
+        
+        int accountId = Integer.parseInt(req.getParameter("id"));
+        
+        System.out.print(accountId);
+       
+        ShopModel shop = null;
+        
+		try {
+			shop = shopService.findByAccountId(accountId);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+        
+        
+        int shopId = shop.getId(); //co the lay theo account login
+        
+        System.out.print(shopId);
 
         try {
             List<ProductModel> products = productService.getProductsByShop(shopId, page, pageSize);
@@ -36,6 +58,7 @@ public class ListProductController extends HttpServlet {
             int begin = Math.max(page - 2, 1);
             int end = Math.min(page + 2, totalPages);
 
+            req.setAttribute("shop", shopId);
             req.setAttribute("products", products);
             req.setAttribute("currentPage", page);
             req.setAttribute("totalPages", totalPages);

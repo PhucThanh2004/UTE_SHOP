@@ -23,7 +23,7 @@ public class WaitingController extends HttpServlet {
 			AccountModel u = (AccountModel) session.getAttribute("account");
 			req.setAttribute("email", u.getEmail());
 			if (u.getIsSeller() == true) {
-				resp.sendRedirect(req.getContextPath() + "/admin/home");
+				resp.sendRedirect(req.getContextPath() + "/home");
 			} else {
 				resp.sendRedirect(req.getContextPath() + "/home");
 			}

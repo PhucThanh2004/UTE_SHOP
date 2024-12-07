@@ -6,5 +6,7 @@ public interface IShopDao {
     void insert(ShopModel shop) throws Exception;
 
     ShopModel findByAccountId(int accountId) throws Exception;
+    ShopModel findByShopId(int shopId) throws Exception;
+    
 
 }

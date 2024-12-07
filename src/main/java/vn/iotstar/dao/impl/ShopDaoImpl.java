@@ -68,4 +68,24 @@ public class ShopDaoImpl implements IShopDao {
             return null;
         }
     }
+
+	@Override
+	public ShopModel findByShopId(int shopId) throws Exception {
+		 String sql = "SELECT * FROM shops WHERE id = ?";
+	        try (Connection connection = dbConnectSQL.getConnection();
+	             PreparedStatement stmt = connection.prepareStatement(sql)) {
+	            stmt.setInt(1, shopId);
+	            ResultSet rs = stmt.executeQuery();
+	            if (rs.next()) {
+	                ShopModel shop = new ShopModel();
+	                shop.setId(rs.getInt("id"));
+	                shop.setName(rs.getString("name"));
+	                shop.setDescription(rs.getString("description"));
+	                shop.setAddress(rs.getString("address"));
+	                shop.setAccountId(rs.getInt("account_id"));
+	                return shop;
+	            }
+	            return null;
+	        }
+	}
 }

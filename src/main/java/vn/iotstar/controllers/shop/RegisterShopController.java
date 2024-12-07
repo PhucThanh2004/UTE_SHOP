@@ -16,7 +16,11 @@ import java.time.LocalDateTime;
 @WebServlet(urlPatterns = {"/register-shop"})
 public class RegisterShopController extends HttpServlet {
 
-    private IShopService shopService;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private IShopService shopService;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,9 +32,11 @@ public class RegisterShopController extends HttpServlet {
         try {
             shopService = new ShopServiceImpl();
 
-            int accountId = 1;
+            int accountId = Integer.parseInt(req.getParameter("accountId"));
+            System.out.println(accountId);
 
             ShopModel shop = shopService.findByAccountId(accountId);
+           
 
             if(shop != null){
                 req.setAttribute("errorMessage", "Tài khoản của bạn đã đăng ký shop. Vui lòng vào truy cập vào phần cửa hàng của bạn.");
@@ -51,7 +57,7 @@ public class RegisterShopController extends HttpServlet {
 
             shopService.registerShop(newShop);
 
-            resp.sendRedirect(req.getContextPath() + "/home");
+            resp.sendRedirect(req.getContextPath() + "/shop");
         } catch (Exception e) {
             e.printStackTrace();
         }

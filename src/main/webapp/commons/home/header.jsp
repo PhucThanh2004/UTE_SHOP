@@ -131,8 +131,8 @@
 							<ul>
 								<c:choose>
 									<c:when test="${not empty sessionScope.account}">
-										<li><i class="fa fa-envelope"></i>
-											<a href="${pageContext.request.contextPath}/account?email=${account.email}">${sessionScope.account.email}</a></li>
+										<li><i class="fa fa-envelope"></i> <a
+											href="${pageContext.request.contextPath}/account?email=${account.email}">${sessionScope.account.email}</a></li>
 									</c:when>
 									<c:otherwise>
 										<li><i class="fa fa-envelope"></i> hello@uteshop.com</li>
@@ -173,9 +173,14 @@
 											class="fa fa-user"></i> Login</a>
 									</c:otherwise>
 								</c:choose>
-								<a href="${URL_PRIMARY}register-shop" class="ml-2"><iclass
-										="fafa-shopping-bag">
-									</i> Đăng ký shop</a>
+								<c:choose>
+									<c:when
+										test="${not empty sessionScope.account and sessionScope.account.isSeller == false}">
+										<a href="${URL_PRIMARY}register-shop" class="ml-2"><i
+											class="fa fa-shopping-bag"></i> Đăng ký shop</a>
+									</c:when>
+								</c:choose>
+
 							</div>
 
 						</div>
@@ -196,10 +201,18 @@
 						<ul>
 							<li class="active"><a
 								href="${pageContext.request.contextPath}/home">Home</a></li>
-							<li><a href="${pageContext.request.contextPath}/home">Shop</a></li>
+
+
 							<li><a href="${pageContext.request.contextPath}/home">Blog</a></li>
 							<li><a href="${pageContext.request.contextPath}/orders">Đơn
 									hàng của tôi</a></li>
+							<li><c:choose>
+									<c:when
+										test="${not empty sessionScope.account and sessionScope.account.isSeller == true}">
+										<a href="${pageContext.request.contextPath}/shop/product/list-product?id=${sessionScope.account.id}">Shop
+											của tôi</a>
+									</c:when>
+								</c:choose></li>
 						</ul>
 					</nav>
 				</div>

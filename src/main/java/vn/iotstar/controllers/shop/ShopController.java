@@ -9,7 +9,7 @@ import vn.iotstar.utils.Constant;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = {"/shop"})
+@WebServlet(urlPatterns = {"/shop/home"})
 public class ShopController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
