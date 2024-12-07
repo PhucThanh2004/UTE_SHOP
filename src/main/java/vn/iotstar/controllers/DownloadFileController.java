@@ -23,7 +23,7 @@ public class DownloadFileController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String fileName = req.getParameter("fname");
+		/*String fileName = req.getParameter("fname");
 		String webappPath = getServletContext().getRealPath("/");
 		File rootDir = new File(webappPath).getParentFile().getParentFile().getParentFile();
 		String filePath = rootDir + File.separator + "src" + File.separator + "main" +
@@ -34,6 +34,13 @@ public class DownloadFileController extends HttpServlet {
 		resp.setContentType("image/jpeg");
 		if (file.exists()) {
 			IOUtils.copy(new FileInputStream(file), resp.getOutputStream());
+		}*/
+		
+		String fileName = req.getParameter("fname");
+		File file = new File(Constant.DIR + "/" + fileName);
+		resp.setContentType("image/jpeg");
+		if (file.exists()) {
+		IOUtils.copy(new FileInputStream(file), resp.getOutputStream());
 		}
 
 	}

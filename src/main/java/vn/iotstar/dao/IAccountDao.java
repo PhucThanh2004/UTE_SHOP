@@ -8,6 +8,12 @@ public interface IAccountDao {
 	
 	void insert(AccountModel acc);
 	
+	void updateAvatar(AccountModel acc);
+	
+	void updateCoverImage(AccountModel acc);
+	
+	void updateAccount(AccountModel acc);
+	
 	boolean checkExistEmail(String email);
 	
 	boolean checkExistPhone(String phone);

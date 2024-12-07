@@ -77,8 +77,23 @@ public class AccountModel extends BaseModel {
 	public void setCover_image(String cover_image) {
 		this.cover_image = cover_image;
 	}
+	
+	
 
-    public AccountModel() {
+    public AccountModel(String email, String avatar) {
+		super();
+		this.email = email;
+		this.avatar = avatar;
+	}
+
+	public AccountModel(String name, String phone, String email) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+	}
+
+	public AccountModel() {
     }
 
     public AccountModel(String name, int id, String password, String email, boolean isSeller) {

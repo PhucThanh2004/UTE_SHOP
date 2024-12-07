@@ -38,4 +38,21 @@ public class AccountServiceImpl implements vn.iotstar.service.IAccountService {
 		return accDao.checkExistPhone(phone);
 	}
 
+	@Override
+	public void updateAvatar(AccountModel acc) {
+		accDao.updateAvatar(acc);
+		
+	}
+
+	@Override
+	public void updateAccount(AccountModel acc) {
+		accDao.updateAccount(acc);
+	}
+
+	@Override
+	public void updateCoverImage(AccountModel acc) {
+		accDao.updateCoverImage(acc);
+		
+	}
+
 }

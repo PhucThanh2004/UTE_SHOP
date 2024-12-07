@@ -50,75 +50,68 @@ public class AddProductController extends HttpServlet {
         }
     }
 
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {
-            String name = null;
-            String description = null;
-            double price = 0.0;
-            int stockQuantity = 0;
-            int categoryId = 0;
+    	 try {
+             String name = req.getParameter("name");
+             String description = req.getParameter("description");
+             double price = Double.parseDouble(req.getParameter("price"));
+             int stockQuantity = Integer.parseInt(req.getParameter("stock_quantity"));
+             int categoryId = Integer.parseInt(req.getParameter("category_id"));
 
-            Collection<Part> parts = req.getParts();
-            for (Part part : parts) {
-                String fieldName = part.getName();
+             ProductModel product = new ProductModel();
+             product.setName(name);
+             product.setDescription(description);
+             product.setPrice(price);
+             product.setStockQuantity(stockQuantity);
+             product.setCategoryId(categoryId);
+             product.setShopId(4); // Bạn có thể thay shopId ở đây.
+             product.setCreatedAt(LocalDateTime.now());
 
-                if ("name".equals(fieldName)) {
-                    name = req.getParameter("name");
-                } else if ("description".equals(fieldName)) {
-                    description = req.getParameter("description");
-                } else if ("price".equals(fieldName)) {
-                    price = Double.parseDouble(req.getParameter("price"));
-                } else if ("stock_quantity".equals(fieldName)) {
-                    stockQuantity = Integer.parseInt(req.getParameter("stock_quantity"));
-                } else if ("category_id".equals(fieldName)) {
-                    categoryId = Integer.parseInt(req.getParameter("category_id"));
-                }
-            }
+             productService = new ProductServiceImpl();
+             productService.addProduct(product);
 
-            ProductModel product = new ProductModel();
-            product.setName(name);
-            product.setDescription(description);
-            product.setPrice(price);
-            product.setStockQuantity(stockQuantity);
-            product.setCategoryId(categoryId);
-            product.setShopId(4); // thay shopId
-            product.setCreatedAt(LocalDateTime.now());
-            productService = new ProductServiceImpl();
-            productService.addProduct(product);
+             // Xử lý ảnh sản phẩm
+             for (Part filePart : req.getParts()) {
+                 if ("product_images".equals(filePart.getName())) {
+                     String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                     String uploadPath = Constant.DIR; // Đường dẫn lưu ảnh
 
-            for (Part filePart : req.getParts()) {
-                if ("product_images".equals(filePart.getName())) {
-                    String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                     File uploadFile = new File(uploadPath);
+                     if (!uploadFile.exists()) {
+                         uploadFile.mkdir();
+                     }
 
-                    String webappPath = getServletContext().getRealPath("/");
-                    File rootDir = new File(webappPath).getParentFile().getParentFile().getParentFile();
-                    String uploadPath = rootDir + File.separator + "src" + File.separator + "main" +
-                            File.separator + "webapp" + File.separator + Constant.UPLOAD_DIRECTORY;
+                     // Tạo tên file duy nhất cho ảnh
+                     String newFileName = new Utils().generateUniqueFileName(fileName);
+                     String filePath = uploadPath + File.separator + newFileName;
 
-                    File uploadFile = new File(uploadPath);
-                    if (!uploadFile.exists()) {
-                        uploadFile.mkdir();
-                    }
-                    String newFileName = new Utils().generateUniqueFileName(fileName);
-                    String filePath = uploadPath + File.separator + newFileName;
-                    filePart.write(filePath);
+                     // Lưu file vào thư mục
+                     filePart.write(filePath);
 
-                    ProductImageModel productImage = new ProductImageModel();
-                    productImage.setProductId(product.getId());
-                    productImage.setProductImage("/uploads/" + newFileName);
-                    productImageService = new ProductImageServiceImpl();
-                    productImageService.addProductImage(productImage);
-                }
-            }
-            req.getSession().setAttribute("message", "Thêm mới sản phẩm thành công!");
-            resp.sendRedirect(req.getContextPath() + "/shop/product/list-product");
-        } catch (Exception e) {
-            req.getSession().setAttribute("error", "Thêm mới sản phẩm thất bại!");
-            resp.sendRedirect(req.getContextPath() + "/shop/product/list-product");
-            throw new RuntimeException(e);
-        }
+                     // Thêm thông tin ảnh vào cơ sở dữ liệu
+                     ProductImageModel productImage = new ProductImageModel();
+                     productImage.setProductId(product.getId());
+                     productImage.setProductImage(newFileName);
+
+                     productImageService = new ProductImageServiceImpl();
+                     productImageService.addProductImage(productImage);
+                 }
+             }
+
+             // Hiển thị thông báo thành công
+             req.getSession().setAttribute("message", "Thêm mới sản phẩm thành công!");
+             resp.sendRedirect(req.getContextPath() + "/shop/product/list-product");
+
+         } catch (Exception e) {
+             req.getSession().setAttribute("error", "Thêm mới sản phẩm thất bại!");
+             resp.sendRedirect(req.getContextPath() + "/shop/product/list-product");
+             throw new RuntimeException(e);
+         }
     }
+
 }
+
 
 

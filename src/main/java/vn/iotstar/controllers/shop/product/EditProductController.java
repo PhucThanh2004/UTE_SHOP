@@ -84,9 +84,8 @@ public class EditProductController extends HttpServlet {
                     String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
 
                     String webappPath = getServletContext().getRealPath("/");
-                    File rootDir = new File(webappPath).getParentFile().getParentFile().getParentFile();
-                    String uploadPath = rootDir + File.separator + "src" + File.separator + "main" +
-                            File.separator + "webapp" + File.separator + Constant.UPLOAD_DIRECTORY;
+                   
+                    String uploadPath = Constant.DIR; 
 
                     File uploadFile = new File(uploadPath);
                     if (!uploadFile.exists()) {

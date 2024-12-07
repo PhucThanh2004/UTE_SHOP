@@ -72,8 +72,71 @@ public class AccountDaoImpl extends DBConnectSQL implements IAccountDao {
 		//}
 		
 		System.out.print(userDao.findByUserName("huyen123"));
-		//userDao.insert(new UsersModel_21110476("thanh@gmail.com","phucThanh", 030 , "123", null, null, true ));
+		userDao.updateAvatar(new AccountModel("thanh@gmail.com", "abc"));
+		//userDao.updateAccount(new AccountModel("phucThanh", "0394601129", "thanh@gmail.com"));
 		
 	}
+
+	@Override
+	public void updateAvatar(AccountModel acc) {
+		 String sql = "UPDATE accounts SET avatar=? WHERE email=?";
+
+		    try {
+		        conn = super.getConnection();
+		        ps = conn.prepareStatement(sql);
+
+		        ps.setString(1, acc.getAvatar());
+		        ps.setString(2, acc.getEmail());
+
+		        ps.executeUpdate();
+
+		        conn.close();
+		        ps.close();
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		
+	}
+
+	public void updateAccount(AccountModel acc) {
+	    String sql = "UPDATE accounts SET name=?, phone=? WHERE email=?";
+
+	    try {
+	        conn = super.getConnection();
+	        ps = conn.prepareStatement(sql);
+
+	        ps.setString(1, acc.getName());
+	        ps.setString(2, acc.getPhone());
+	        ps.setString(3, acc.getEmail());
+
+	        ps.executeUpdate();
+
+	        conn.close();
+	        ps.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	@Override
+	public void updateCoverImage(AccountModel acc) {
+		String sql = "UPDATE accounts SET cover_image=? WHERE email=?";
+
+	    try {
+	        conn = super.getConnection();
+	        ps = conn.prepareStatement(sql);
+
+	        ps.setString(1, acc.getCover_image());
+	        ps.setString(2, acc.getEmail());
+
+	        ps.executeUpdate();
+
+	        conn.close();
+	        ps.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
 
 }

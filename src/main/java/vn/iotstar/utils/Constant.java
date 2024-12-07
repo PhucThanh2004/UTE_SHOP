@@ -5,7 +5,7 @@ public class Constant {
 	public static final String COOKIE_REMEMBER = "email";
 	public static final String REGISTER = "/views/register.jsp";
 	
-	public static final String DIR="E:/upload2";
+	public static final String DIR="E:\\upload2";
 
 	// views
 	public static final  String SHOP_LIST_PRODUCT = "/views/shop/product/list_product.jsp";

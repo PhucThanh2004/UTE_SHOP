@@ -132,7 +132,7 @@
 								<c:choose>
 									<c:when test="${not empty sessionScope.account}">
 										<li><i class="fa fa-envelope"></i>
-											${sessionScope.account.email}</li>
+											<a href="${pageContext.request.contextPath}/account?email=${account.email}">${sessionScope.account.email}</a></li>
 									</c:when>
 									<c:otherwise>
 										<li><i class="fa fa-envelope"></i> hello@uteshop.com</li>
