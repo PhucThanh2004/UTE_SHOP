@@ -116,17 +116,10 @@ public class AddProductController extends HttpServlet {
                  }
              }
              
-             ShopModel shop = null;
+          
              
              
-     		try {
-     			shop = shopService.findByShopId(shopId);
-     		} catch (Exception e) {
-     			
-     			e.printStackTrace();
-     		}
-              
-             accountId = shop.getAccountId();
+     		
 
              // Hiển thị thông báo thành công
              req.getSession().setAttribute("message", "Thêm mới sản phẩm thành công!");

@@ -45,6 +45,7 @@ public class DeleteProductController extends HttpServlet {
         try {
             int productId = Integer.parseInt(req.getParameter("id")); // Lấy productId từ URL
             boolean isDeleted = productService.deleteProduct(productId);
+            int shopId = Integer.parseInt(req.getParameter("id"));
 
             if (isDeleted) {
                 req.getSession().setAttribute("message", "Xóa sản phẩm thành công!");
@@ -53,7 +54,7 @@ public class DeleteProductController extends HttpServlet {
             }
 
             // Redirect về trang danh sách sản phẩm
-            resp.sendRedirect(req.getContextPath() + "/shop/product/list-product");
+            resp.sendRedirect(req.getContextPath() + "/shop/product/list-product?id="+ shopId);
         } catch (Exception e) {
             req.getSession().setAttribute("error", "Đã xảy ra lỗi khi xóa sản phẩm: " + e.getMessage());
             resp.sendRedirect(req.getContextPath() + "/shop/product/list-product");
@@ -63,3 +64,5 @@ public class DeleteProductController extends HttpServlet {
 }
 
 
+
+	

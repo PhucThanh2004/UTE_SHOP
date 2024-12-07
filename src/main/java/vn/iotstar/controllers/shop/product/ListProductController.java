@@ -46,7 +46,16 @@ public class ListProductController extends HttpServlet {
 		}
         
         
-        int shopId = shop.getId(); //co the lay theo account login
+        int shopId = 0;
+        
+        if(shop == null)
+        {
+        	shopId = Integer.parseInt(req.getParameter("id"));
+        }
+        else
+        {
+        	shopId = shop.getId(); //co the lay theo account login
+        }
         
         System.out.print(shopId);
 
@@ -71,5 +80,6 @@ public class ListProductController extends HttpServlet {
         }
     }
 }
+
 
 
