@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import vn.iotstar.models.AccountModel;
 import vn.iotstar.models.CartDetailWithProduct;
 import vn.iotstar.models.CartModel;
 import vn.iotstar.service.ICartService;
@@ -25,7 +27,9 @@ public class ListCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            int accountId = 1;
+        	HttpSession session = req.getSession();
+       	 AccountModel account = (AccountModel) session.getAttribute("account"); 
+       	 int accountId = account.getId(); 
             CartModel cart = cartService.findCartByAccountId(accountId);
             if(cart == null) {
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Not found cart");

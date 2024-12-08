@@ -1,5 +1,6 @@
 package vn.iotstar.service.impl;
 
+import vn.iotstar.configs.DBConnectSQL;
 import vn.iotstar.dao.ICartDao;
 import vn.iotstar.dao.IOrderDao;
 import vn.iotstar.dao.impl.CartDaoImpl;
@@ -9,12 +10,16 @@ import vn.iotstar.models.CartModel;
 import vn.iotstar.models.OrderWithDetails;
 import vn.iotstar.service.IOrderService;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OrderServiceImpl implements IOrderService {
+public class OrderServiceImpl extends DBConnectSQL implements IOrderService {
     private ICartDao cartDao;
     private IOrderDao orderDao;
 
@@ -80,4 +85,14 @@ public class OrderServiceImpl implements IOrderService {
     public boolean cancelOrder(int orderId) throws Exception {
         return orderDao.cancelOrder(orderId);
     }
+
+	@Override
+	public void updateAddress(int orderId, int addressId) throws Exception {
+		orderDao.updateAddress(orderId, addressId);
+		
+	}
+
+   
+		
+	
 }

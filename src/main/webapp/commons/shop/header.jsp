@@ -63,11 +63,12 @@
 
 			<!-- Heading -->
 			<div class="sidebar-heading">Sản phẩm</div>
-			<c:set var="id" value="${param.id}" />
+			<c:set var="id" value="${param.shopId}" />
 			<c:choose>
 			
 				<c:when test="${empty id}">
-					<c:set var="id" value="${param.shopId}" />
+					
+					<c:set var="id" value="${param.id}" />
 				</c:when>
 			</c:choose>
 

@@ -73,9 +73,10 @@ public class AddressModel extends BaseModel {
     // Constructors
     public AddressModel() {
     }
+    
+    
 
-	public AddressModel(String email, String province, String district, String wards, String detail,
-			String phone) {
+	public AddressModel(String email, String province, String district, String wards, String detail, String phone) {
 		super();
 		this.email = email;
 		this.province = province;
@@ -85,6 +86,19 @@ public class AddressModel extends BaseModel {
 		this.phone = phone;
 	}
 
+	public AddressModel(String email, String province, String district, String wards, String detail, int id,
+			String phone) {
+		super();
+		this.email = email;
+		this.province = province;
+		this.district = district;
+		this.wards = wards;
+		this.detail = detail;
+		this.id = id;
+		this.phone = phone;
+	}
+
+	
 	
     
 

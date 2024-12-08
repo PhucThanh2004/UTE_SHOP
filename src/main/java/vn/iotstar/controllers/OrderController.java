@@ -5,6 +5,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import vn.iotstar.models.AccountModel;
 import vn.iotstar.models.OrderWithDetails;
 import vn.iotstar.service.IOrderService;
 import vn.iotstar.service.impl.OrderServiceImpl;
@@ -18,7 +20,10 @@ public class OrderController extends HttpServlet {
     private IOrderService orderService;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int accountId = 1; // thay account vào khi làm login xong
+    	HttpSession session = request.getSession();
+    	 AccountModel account = (AccountModel) session.getAttribute("account"); 
+    	 int accountId = account.getId(); 
+    	//int accountId = 1; // thay account vào khi làm login xong
         orderService = new OrderServiceImpl();
         try {
                 List<OrderWithDetails> orders = orderService.getOrdersByAccountId(accountId);

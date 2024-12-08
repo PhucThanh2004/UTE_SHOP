@@ -14,4 +14,5 @@ public interface IOrderDao {
     List<OrderWithDetails> getOrdersByAccountId(int accountId) throws Exception;
 
     boolean cancelOrder(int orderId) throws Exception;
+    void updateAddress(int orderId, int addressId) throws Exception ;
 }

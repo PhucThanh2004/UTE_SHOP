@@ -4,103 +4,121 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderWithDetails {
-    private int orderId;
-    private int accountId;
-    private int shopId;
-    private double totalAmount;
-    private String paymentMethod;
-    private String status;
-    private String note;
-    private LocalDateTime createdAt;
-    private List<OrderDetailWithProduct> orderDetails;
-    private String accountName;
-    private String accountEmail;
+	private int orderId;
+	private int accountId;
+	private int shopId;
+	private double totalAmount;
+	private String paymentMethod;
+	private String status;
+	private String note;
+	private LocalDateTime createdAt;
+	private List<OrderDetailWithProduct> orderDetails;
+	private String accountName;
+	private String accountEmail;
+	private int address_id;
+	private AddressModel address; 
+	
+	 public AddressModel getAddress() {
+	        return address;
+	    }
 
-    public String getAccountName() {
-        return accountName;
-    }
+	    public void setAddress(AddressModel address) {
+	        this.address = address;
+	    }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
-    }
+	public int getAddress_id() {
+		return address_id;
+	}
 
-    public String getAccountEmail() {
-        return accountEmail;
-    }
+	public void setAddress_id(int address_id) {
+		this.address_id = address_id;
+	}
 
-    public void setAccountEmail(String accountEmail) {
-        this.accountEmail = accountEmail;
-    }
+	public String getAccountName() {
+		return accountName;
+	}
 
-    public int getOrderId() {
-        return orderId;
-    }
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
+	}
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
-    }
+	public String getAccountEmail() {
+		return accountEmail;
+	}
 
-    public int getAccountId() {
-        return accountId;
-    }
+	public void setAccountEmail(String accountEmail) {
+		this.accountEmail = accountEmail;
+	}
 
-    public void setAccountId(int accountId) {
-        this.accountId = accountId;
-    }
+	public int getOrderId() {
+		return orderId;
+	}
 
-    public int getShopId() {
-        return shopId;
-    }
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
 
-    public void setShopId(int shopId) {
-        this.shopId = shopId;
-    }
+	public int getAccountId() {
+		return accountId;
+	}
 
-    public double getTotalAmount() {
-        return totalAmount;
-    }
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
+	}
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
-    }
+	public int getShopId() {
+		return shopId;
+	}
 
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
+	public void setShopId(int shopId) {
+		this.shopId = shopId;
+	}
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
-    }
+	public double getTotalAmount() {
+		return totalAmount;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
 
-    public String getNote() {
-        return note;
-    }
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
 
-    public void setNote(String note) {
-        this.note = note;
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+	public String getNote() {
+		return note;
+	}
 
-    public List<OrderDetailWithProduct> getOrderDetails() {
-        return orderDetails;
-    }
+	public void setNote(String note) {
+		this.note = note;
+	}
 
-    public void setOrderDetails(List<OrderDetailWithProduct> orderDetails) {
-        this.orderDetails = orderDetails;
-    }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public List<OrderDetailWithProduct> getOrderDetails() {
+		return orderDetails;
+	}
+
+	public void setOrderDetails(List<OrderDetailWithProduct> orderDetails) {
+		this.orderDetails = orderDetails;
+	}
 }

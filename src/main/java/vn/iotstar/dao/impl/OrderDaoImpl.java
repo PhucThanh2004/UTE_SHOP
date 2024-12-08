@@ -1,7 +1,10 @@
 package vn.iotstar.dao.impl;
 
 import vn.iotstar.configs.DBConnectSQL;
+
+
 import vn.iotstar.dao.IOrderDao;
+import vn.iotstar.models.AddressModel;
 import vn.iotstar.models.OrderDetailWithProduct;
 import vn.iotstar.models.OrderWithDetails;
 import vn.iotstar.models.ProductModel;
@@ -9,13 +12,40 @@ import vn.iotstar.models.ProductModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+
+
+
 public class OrderDaoImpl implements IOrderDao {
+	
+	
+	public static void main(String[] args) {
+        // Khởi tạo đối tượng OrderDaoImpl để gọi phương thức updateAddress
+        OrderDaoImpl orderDao = new OrderDaoImpl();
+
+        // Các tham số cần thiết cho phương thức updateAddress
+        int orderId = 25;      // ID của đơn hàng cần cập nhật
+        int newAddressId = 5; // ID của địa chỉ mới cần cập nhật cho đơn hàng
+
+        try {
+            // Gọi phương thức updateAddress để cập nhật địa chỉ cho đơn hàng
+            orderDao.updateAddress(orderId, newAddressId);
+
+            // In ra thông báo thành công
+            System.out.println("Order " + orderId + " has been successfully updated with new address ID: " + newAddressId);
+        } catch (Exception e) {
+            // Xử lý lỗi nếu có
+            e.printStackTrace();
+        }
+    }
+	
     private DBConnectSQL dbConnectSQL;
 
     public OrderDaoImpl() {
@@ -35,6 +65,7 @@ public class OrderDaoImpl implements IOrderDao {
             stmt.setDouble(3, totalAmount);
             stmt.setString(4, paymentMethod);
             stmt.setString(5, note);
+            //stmt.setInt(6, addressId);
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -63,19 +94,23 @@ public class OrderDaoImpl implements IOrderDao {
 
     @Override
     public List<OrderWithDetails> getOrdersByShopId(int shopId) throws Exception {
-        String sql = "SELECT o.id AS order_id, o.account_id, o.shop_id, o.total_amount, o.payment_method, " +
-                "o.status, o.note, o.created_at, " +
+    	String sql = "SELECT o.id AS order_id, o.account_id, o.shop_id, o.total_amount, o.payment_method, " +
+                "o.status, o.note, o.created_at, o.address_id, " +
                 "od.id AS order_detail_id, od.product_id, od.quantity, od.price, " +
                 "p.name AS product_name, p.description AS product_description, p.price AS product_price, " +
                 "pi.product_image AS product_image, " +
-                "a.name AS account_name, a.email AS account_email " +
+                "a.name AS account_name, a.email AS account_email, " +
+                "ad.email AS address_email, ad.province AS address_province, ad.district AS address_district, " +
+                "ad.wards AS address_wards, ad.detail AS address_detail, ad.phone AS address_phone " +
                 "FROM orders o " +
                 "JOIN accounts a ON o.account_id = a.id " +
                 "JOIN order_details od ON o.id = od.order_id " +
                 "JOIN products p ON od.product_id = p.id " +
                 "LEFT JOIN (SELECT product_id, MIN(product_image) AS product_image FROM product_images GROUP BY product_id) pi ON p.id = pi.product_id " +
+                "LEFT JOIN address ad ON o.address_id = ad.id " + // Thêm phần này để lấy địa chỉ
                 "WHERE o.shop_id = ? " +
                 "ORDER BY o.created_at DESC";
+
 
         List<OrderWithDetails> orders = new ArrayList<>();
         try (Connection conn = dbConnectSQL.getConnection();
@@ -99,8 +134,19 @@ public class OrderDaoImpl implements IOrderDao {
                     order.setStatus(rs.getString("status"));
                     order.setNote(rs.getString("note"));
                     order.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                    order.setAddress_id(rs.getInt("address_id"));
                     order.setAccountName(rs.getString("account_name"));
                     order.setAccountEmail(rs.getString("account_email"));
+                    
+                    AddressModel address = new AddressModel();
+                    address.setEmail(rs.getString("address_email"));
+                    address.setProvince(rs.getString("address_province"));
+                    address.setDistrict(rs.getString("address_district"));
+                    address.setWards(rs.getString("address_wards"));
+                    address.setDetail(rs.getString("address_detail"));
+                    address.setPhone(rs.getString("address_phone"));
+                    order.setAddress(address); 
+                    
                     order.setOrderDetails(new ArrayList<>());
 
                     // Thêm đơn hàng vào Map
@@ -239,5 +285,25 @@ public class OrderDaoImpl implements IOrderDao {
         }
     }
 
+	
+		
+    @Override
+    public void updateAddress(int orderId, int addressId) throws Exception {
+        String sql = "UPDATE orders SET address_id = ? WHERE id = ?";
+        System.out.println("SQL: " + sql + ", address_id: " + addressId + ", orderId: " + orderId);
+        try (Connection conn = dbConnectSQL.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, addressId);
+            stmt.setInt(2, orderId);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(); // In lỗi nếu có
+        }
+    }
 
+    
+   
+
+   	
 }
+
