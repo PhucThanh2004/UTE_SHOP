@@ -24,4 +24,9 @@ public class ShopServiceImpl implements IShopService {
 	public ShopModel findByShopId(int shopId) throws Exception {
 		return shopDao.findByShopId(shopId);
 	}
+	@Override
+	public void updateShopInfo(ShopModel shop) throws Exception {
+		shopDao.updateShopInfo(shop);
+		
+	}
 }

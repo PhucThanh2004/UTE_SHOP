@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+<c:url value="/assets/user" var="URL"></c:url>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng ký tài khoản</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
     <script>
         function validateForm() {
             const password = document.getElementById("password").value;
@@ -24,7 +24,7 @@
 </head>
 <body>
     <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section">
+    <section class="breadcrumb-section set-bg" data-setbg="${URL}/img/breadcrumb.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -42,53 +42,62 @@
     <!-- Breadcrumb Section End -->
 
     <!-- Register Section Begin -->
-    <section class="register-section spad">
+    <section class="register-section py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- Hiển thị thông báo lỗi nếu có -->
-                    <c:if test="${not empty error}">
-                        <div class="alert alert-danger">
-                            ${error}
-                        </div>
-                    </c:if>
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <h4 class="card-title text-center mb-4">Tạo tài khoản mới</h4>
 
-                    <form action="${pageContext.request.contextPath}/register" method="POST" class="form" onsubmit="return validateForm()">
-                        <div class="form-group">
-                            <label for="name">Họ và tên</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên" required>
-                        </div>
+                            <!-- Hiển thị thông báo lỗi nếu có -->
+                            <c:if test="${not empty error}">
+                                <div class="alert alert-danger">
+                                    ${error}
+                                </div>
+                            </c:if>
 
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" required>
-                        </div>
+                            <form action="${pageContext.request.contextPath}/register" method="POST" onsubmit="return validateForm()">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Họ và tên</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên" required>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="phone">Số điện thoại</label>
-                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
-                        </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" required>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="password">Mật khẩu</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
-                        </div>
+                                <div class="mb-3">
+                                    <label for="phone" class="form-label">Số điện thoại</label>
+                                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+                                </div>
 
-                        <div class="form-group">
-                            <label for="confirmPassword">Nhập lại mật khẩu</label>
-                            <input type="password" class="form-control" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
-                        </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Mật khẩu</label>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                                </div>
 
-                        <button type="submit" class="site-btn">Đăng ký</button>
-                    </form>
+                                <div class="mb-3">
+                                    <label for="confirmPassword" class="form-label">Nhập lại mật khẩu</label>
+                                    <input type="password" class="form-control" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                                </div>
+
+                                <button type="submit" class="site-btn w-100">Đăng ký</button>
+                            </form>
+
+                            <div class="mt-3 text-center">
+                                <p>Đã có tài khoản? <a href="${pageContext.request.contextPath}/login">Đăng nhập</a></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- Register Section End -->
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

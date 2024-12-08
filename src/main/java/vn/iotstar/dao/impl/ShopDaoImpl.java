@@ -88,4 +88,16 @@ public class ShopDaoImpl implements IShopDao {
 	            return null;
 	        }
 	}
+	@Override
+	public void updateShopInfo(ShopModel shop) throws Exception {
+		String sql = "UPDATE shops SET name = ?, address = ?, description = ? WHERE id = ?";
+        try (Connection connection = dbConnectSQL.getConnection();
+             PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, shop.getName());
+            stmt.setString(2, shop.getAddress());
+            stmt.setString(3, shop.getDescription());
+            stmt.setInt(4, shop.getId());
+            stmt.executeUpdate();
+        }
+       }
 }

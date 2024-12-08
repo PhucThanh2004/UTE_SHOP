@@ -54,8 +54,9 @@
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item"><a class="nav-link" href="index.html">
-					<i class="fas fa-fw fa-tachometer-alt"></i> <span>Dashboard</span>
+			<li class="nav-item"><a class="nav-link"
+				href="${URL_PRIMARY}/home"> <i
+					class="fas fa-fw fa-tachometer-alt"></i> <span>Home page</span>
 			</a></li>
 
 			<!-- Divider -->
@@ -65,9 +66,9 @@
 			<div class="sidebar-heading">Sản phẩm</div>
 			<c:set var="id" value="${param.shopId}" />
 			<c:choose>
-			
+
 				<c:when test="${empty id}">
-					
+
 					<c:set var="id" value="${param.id}" />
 				</c:when>
 			</c:choose>
@@ -82,6 +83,12 @@
 			<li class="nav-item"><a class="nav-link"
 				href="${URL_PRIMARY}shop/orders?shopId=${id}"> <i
 					class="fas fa-fw fa-table"></i> <span>Danh sách đơn hàng</span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="${URL_PRIMARY}shop/orders?shopId=${id}"> <i
+					class="fas fa-fw fa-table"></i> <span>Doanh thu cửa hàng</span></a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="${URL_PRIMARY}shop/profile?shopId=${id}"> <i
+					class="fas fa-fw fa-table"></i> <span>Thông tin cửa hàng</span></a></li>
 
 			<hr class="sidebar-divider">
 
@@ -89,7 +96,6 @@
 			<div class="text-center d-none d-md-inline">
 				<button class="rounded-circle border-0" id="sidebarToggle"></button>
 			</div>
-
 		</ul>
 		<!-- End of Sidebar -->
 
