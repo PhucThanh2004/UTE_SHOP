@@ -7,10 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import vn.iotstar.models.CategoryModel;
 import vn.iotstar.models.ProductModel;
+import vn.iotstar.models.ReviewModel;
 import vn.iotstar.service.ICategoryService;
 import vn.iotstar.service.IProductService;
+import vn.iotstar.service.IReviewService;
 import vn.iotstar.service.impl.CategoryServiceImpl;
 import vn.iotstar.service.impl.ProductServiceImpl;
+import vn.iotstar.service.impl.ReviewServiceImpl;
 import vn.iotstar.utils.Constant;
 
 import java.io.IOException;
@@ -22,10 +25,14 @@ public class ProductDetailController extends HttpServlet {
 
     private IProductService productService;
     private ICategoryService categoryService;
+    private IReviewService reviewService;
+
     @Override
     public void init() throws ServletException {
         productService = new ProductServiceImpl();
         categoryService = new CategoryServiceImpl();
+        reviewService = new ReviewServiceImpl(); // Khởi tạo ReviewService
+
     }
 
     @Override
@@ -40,9 +47,16 @@ public class ProductDetailController extends HttpServlet {
 
             ProductModel product = productService.getProductById(productId);
             req.setAttribute("product", product);
+            
+            List<ReviewModel> reviews = reviewService.getReviewsWithAuthorByProductId(productId);
+            req.setAttribute("reviews", reviews); 
+
             req.getRequestDispatcher(Constant.USER_PRODUCT_DETAIL).forward(req, resp);
         }catch (Exception e) {
             e.printStackTrace();
         }
     }
+    
+   
+
 }

@@ -77,7 +77,7 @@ public class AccountController extends HttpServlet {
 			if (avatarPart != null && avatarPart.getSize() > 0) {
 
 				String fileName = Paths.get(avatarPart.getSubmittedFileName()).getFileName().toString();
-				String uploadDirectory = "E:/upload2"; // Thư mục lưu ảnh trên ổ E
+				String uploadDirectory = "C:/upload2"; // Thư mục lưu ảnh trên ổ E
 				File uploadDir = new File(uploadDirectory);
 				if (!uploadDir.exists()) {
 					uploadDir.mkdirs();
@@ -116,7 +116,7 @@ public class AccountController extends HttpServlet {
 			if (avatarPart != null && avatarPart.getSize() > 0) {
 
 				String fileName = Paths.get(avatarPart.getSubmittedFileName()).getFileName().toString();
-				String uploadDirectory = "E:/upload2"; // Thư mục lưu ảnh trên ổ E
+				String uploadDirectory = "C:/upload2"; // Thư mục lưu ảnh trên ổ E
 				File uploadDir = new File(uploadDirectory);
 				if (!uploadDir.exists()) {
 					uploadDir.mkdirs();

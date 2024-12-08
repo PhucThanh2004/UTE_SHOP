@@ -44,6 +44,9 @@
 
                     <button type="submit" class="site-btn">Đăng nhập</button>
                 </form>
+                <div class="mt-3">
+                    <a href="${pageContext.request.contextPath}/forgotPassword" class="btn btn-link">Quên mật khẩu?</a>
+                </div>
             </div>
         </div>
     </div>

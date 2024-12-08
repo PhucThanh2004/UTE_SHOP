@@ -154,12 +154,12 @@
 							</div>
 							<div class="header__top__right__language">
 								<img src="img/language.png" alt="">
-								<div>English</div>
-								<span class="arrow_carrot-down"></span>
-								<ul>
-									<li><a href="#">Spanis</a></li>
-									<li><a href="#">English</a></li>
-								</ul>
+								<div class="header__top__right__auth">
+									<a href="${pageContext.request.contextPath}/register"
+										class="btn-register">Đăng ký</a>
+								</div>
+
+								
 							</div>
 							<!-- Thay đổi phần hiển thị Login/Logout và giữ lại Đăng ký shop -->
 							<div class="header__top__right__auth">

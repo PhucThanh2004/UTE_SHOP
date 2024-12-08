@@ -55,4 +55,33 @@ public class AccountServiceImpl implements vn.iotstar.service.IAccountService {
 		
 	}
 
+	@Override
+	public boolean register(String email, String password, String name, String code, String phone, String avatar,
+			String cover_image) {
+		if (accDao.checkExistEmail(email))
+		{
+			return false;
+		}
+		accDao.insertregister(new AccountModel(email, password, name, code, phone, avatar, cover_image, 0));
+		return true;
+	}
+
+	@Override
+	public void updatestatus(AccountModel user) {
+		accDao.updatestatus(user);		
+		
+	}
+
+	@Override
+	public void updateCode(String email, String code) throws Exception {
+		accDao.updateCode(email, code);
+		
+	}
+
+	@Override
+	public boolean updatePassword(String email, String code, String newPassword) throws Exception {
+        return accDao.updatePassword(email, code, newPassword);
+
+	}
+
 }

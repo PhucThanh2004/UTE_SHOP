@@ -1,43 +1,94 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<%@ taglib prefix="fmt" uri="jakarta.tags.fmt"%>
-<%@ taglib prefix="fn" uri="jakarta.tags.functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Register</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký tài khoản</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script>
+        function validateForm() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Mật khẩu nhập lại không khớp. Vui lòng kiểm tra lại!");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </head>
 <body>
-	<form action="register" method="post">
-		<div class="container">
-			<h1>Register</h1>
-			<p>Please fill in this form to create an account.</p>
-			<hr>
+    <!-- Breadcrumb Section Begin -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="breadcrumb__text">
+                        <h2>Đăng ký tài khoản</h2>
+                        <div class="breadcrumb__option">
+                            <a href="${pageContext.request.contextPath}/home">Trang chủ</a>
+                            <span>Đăng ký</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
 
-			<label for="email"><b>Email</b></label>
-			<input type="text" placeholder="Enter Email" name="email" id="email" required>
+    <!-- Register Section Begin -->
+    <section class="register-section spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Hiển thị thông báo lỗi nếu có -->
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger">
+                            ${error}
+                        </div>
+                    </c:if>
 
-			<label for="fullname"><b>Full Name</b></label>
-			<input type="text" placeholder="Enter Full Name" name="fullname" id="fullname" required>
+                    <form action="${pageContext.request.contextPath}/register" method="POST" class="form" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label for="name">Họ và tên</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ và tên" required>
+                        </div>
 
-			<label for="phone"><b>Phone Number</b></label>
-			<input type="text" placeholder="Enter Phone Number" name="phone" id="phone" required>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Nhập email" required>
+                        </div>
 
-			<label for="psw"><b>Password</b></label>
-			<input type="password" placeholder="Enter Password" name="passwd" id="passwd" required>
+                        <div class="form-group">
+                            <label for="phone">Số điện thoại</label>
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="Nhập số điện thoại" required>
+                        </div>
 
-			<label for="psw-repeat"><b>Repeat Password</b></label>
-			<input type="password" placeholder="Repeat Password" name="passwd-repeat" id="passwd-repeat" required>
-			<hr>
+                        <div class="form-group">
+                            <label for="password">Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="confirmPassword">Nhập lại mật khẩu</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Nhập lại mật khẩu" required>
+                        </div>
 
-			<button type="submit" class="registerbtn">Register</button>
-		</div>
+                        <button type="submit" class="site-btn">Đăng ký</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Register Section End -->
 
-		<div class="container signin">
-			<p>Already have an account? <a href="#">Sign in</a>.</p>
-		</div>
-	</form>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

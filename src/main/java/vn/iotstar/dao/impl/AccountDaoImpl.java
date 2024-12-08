@@ -3,6 +3,7 @@ package vn.iotstar.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import vn.iotstar.configs.DBConnectSQL;
 import vn.iotstar.dao.IAccountDao;
@@ -51,8 +52,23 @@ public class AccountDaoImpl extends DBConnectSQL implements IAccountDao {
 
 	@Override
 	public boolean checkExistEmail(String email) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean duplicate = false;
+		String sql = "Select * From accounts where email =? ";
+		try { 
+			conn = new DBConnectSQL().getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				duplicate =true;
+			}
+			ps.close();
+			conn.close();
+		} catch (Exception e) {
+		e.printStackTrace();
+		}
+		return duplicate;
+
 	}
 
 	@Override
@@ -136,6 +152,82 @@ public class AccountDaoImpl extends DBConnectSQL implements IAccountDao {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
+	}
+
+	@Override
+	public void insertregister(AccountModel acc) {
+		String sql = "INSERT INTO accounts (name, password, email, phone, avatar, cover_image, code, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+		try {
+			conn = super.getConnection();
+			ps = conn.prepareStatement(sql);
+
+			ps.setString(1, acc.getEmail());
+			ps.setString(2, acc.getPassword());
+			ps.setString(3, acc.getName());
+			ps.setString(4, acc.getPhone());
+			ps.setString(5, acc.getAvatar());
+			ps.setString(6, acc.getCover_image());
+			ps.setString(7, acc.getCode());
+			ps.setInt(8, acc.getStatus());
+
+			// Thực thi câu lệnh chèn
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}		
+	}
+
+	@Override
+	public void updatestatus(AccountModel user) {
+		String sql = "UPDATE [accounts] SET status =? , code =? WHERE email = ?";
+		try {
+		conn = new DBConnectSQL().getConnection();
+		ps = conn.prepareStatement(sql);
+
+		ps.setInt(1, user.getStatus());
+		ps.setString(2,user.getCode());
+		ps.setString(3, user.getEmail());
+		ps.executeUpdate();
+
+		} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}
+				
+	}
+
+	@Override
+	public void updateCode(String email, String code) throws Exception {
+		String sql = "UPDATE accounts SET code = ? WHERE email = ?";
+	    try (Connection conn = getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setString(1, code);
+	        ps.setString(2, email);
+	        ps.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+				
+	}
+
+	@Override
+	public boolean updatePassword(String email, String code, String newPassword) throws Exception {
+		 String sql = "UPDATE accounts SET password = ? WHERE email = ? AND code = ?";
+		    try (Connection conn = getConnection();
+		         PreparedStatement ps = conn.prepareStatement(sql)) {
+		        ps.setString(1, newPassword);
+		        ps.setString(2, email);
+		        ps.setString(3, code);
+
+		        int rowsUpdated = ps.executeUpdate();
+		        return rowsUpdated > 0; // Return true if at least one row is updated
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        return false; // Return false if an error occurs
+		    }
 	}
 
 
