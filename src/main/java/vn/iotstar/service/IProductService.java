@@ -20,4 +20,6 @@ public interface IProductService {
     List<ProductModel> getProductsByCategory(int categoryId, int limit) throws Exception;
 
     List<ProductModel> getProductsNew( int limit) throws Exception;
+    
+    List<ProductModel> searchProductsByName(String name) throws Exception;
 }

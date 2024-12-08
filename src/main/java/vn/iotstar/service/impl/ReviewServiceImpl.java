@@ -20,6 +20,11 @@ public class ReviewServiceImpl implements IReviewService{
 	public void addReview(ReviewModel review) throws Exception {
 		revDao.addReview(review);
 	}
+
+	@Override
+	public int countReview(int productId) throws Exception {
+		return revDao.countReview(productId);
+	}
 	
 
 }

@@ -94,4 +94,28 @@ public class ReviewDaoImpl implements IReviewDao {
         }
     }
 
+	@Override
+	public int countReview(int productId) throws Exception{
+		 int count = 0;
+		    String query = "SELECT COUNT(*) FROM reviews WHERE product_id = ?";
+
+		    DBConnectSQL dBConnectSQL = new DBConnectSQL();
+		    try (Connection connection = dBConnectSQL.getConnection(); 
+		         PreparedStatement statement = connection.prepareStatement(query)) {
+
+		        statement.setInt(1, productId);
+
+		        try (ResultSet resultSet = statement.executeQuery()) {
+		            if (resultSet.next()) {
+		                count = resultSet.getInt(1); 
+		            }
+		        }
+		    } catch (SQLException e) {
+	
+		        System.err.println("Error while counting reviews: " + e.getMessage());
+		        e.printStackTrace(); 
+		    }
+		    return count;
+	}
+
 }

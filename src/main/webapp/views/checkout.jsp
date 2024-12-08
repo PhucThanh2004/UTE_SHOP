@@ -12,17 +12,17 @@
 						<i class="fa fa-bars"></i> <span>Danh mục sản phẩm</span>
 					</div>
 					<ul>
-						<li><a href="#">Fresh Meat</a></li>
-						<li><a href="#">Vegetables</a></li>
-						<li><a href="#">Fruit & Nut Gifts</a></li>
-						<li><a href="#">Fresh Berries</a></li>
-						<li><a href="#">Ocean Foods</a></li>
-						<li><a href="#">Butter & Eggs</a></li>
+						<li><a href="#">Thịt tươi</a></li>
+						<li><a href="#">Rau củ</a></li>
+						<li><a href="#">Quà tặng trái cây & hạt</a></li>
+						<li><a href="#">Quả tươi</a></li>
+						<li><a href="#">Thủy sản</a></li>
+						<li><a href="#">Bơ & Trứng</a></li>
 						<li><a href="#">Fastfood</a></li>
-						<li><a href="#">Fresh Onion</a></li>
-						<li><a href="#">Papayaya & Crisps</a></li>
-						<li><a href="#">Oatmeal</a></li>
-						<li><a href="#">Fresh Bananas</a></li>
+						<li><a href="#">Hành tươi</a></li>
+						<li><a href="#">Khoai tây & Bánh ngọt</a></li>
+						<li><a href="#">Bột yến mạch</a></li>
+						<li><a href="#">Chuối tươi</a></li>
 					</ul>
 				</div>
 			</div>
@@ -31,10 +31,10 @@
 					<div class="hero__search__form">
 						<form action="#">
 							<div class="hero__search__categories">
-								All Categories <span class="arrow_carrot-down"></span>
+								Tất cả các danh mục <span class="arrow_carrot-down"></span>
 							</div>
-							<input type="text" placeholder="What do yo u need?">
-							<button type="submit" class="site-btn">SEARCH</button>
+							<input type="text" placeholder="Bạn cần gì?">
+							<button type="submit" class="site-btn">TÌM KIẾM</button>
 						</form>
 					</div>
 					<div class="hero__search__phone">
@@ -43,7 +43,7 @@
 						</div>
 						<div class="hero__search__phone__text">
 							<h5>+65 11.188.888</h5>
-							<span>support 24/7 time</span>
+							<span>Hỗ trợ 24/7</span>
 						</div>
 					</div>
 				</div>
@@ -60,9 +60,9 @@
 		<div class="row">
 			<div class="col-lg-12 text-center">
 				<div class="breadcrumb__text">
-					<h2>Checkout</h2>
+					<h2>Thanh toán</h2>
 					<div class="breadcrumb__option">
-						<a href="./index.html">Home</a> <span>Checkout</span>
+						<a href="./index.html">Trang chủ</a> <span>Thanh toán</span>
 					</div>
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 <section class="checkout spad">
 	<div class="container">
 		<div class="checkout__form">
-			<h4>Billing Details</h4>
+			<h4>Thông tin thanh toán</h4>
 			<form action="${pageContext.request.contextPath}/checkout"
 				method="post">
 				<div class="row">
@@ -110,85 +110,73 @@
 									</c:forEach>
 								</div>
 							</div>
-							
+
 							<style>
-    .address-list {
-        margin-top: 10px;
-    }
+.address-list {
+	margin-top: 10px;
+}
 
-    .address-item {
-        padding: 10px;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-        margin-bottom: 15px;
-        border: 1px solid #ddd;
-        transition: background-color 0.3s ease;
-    }
+.address-item {
+	padding: 10px;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	margin-bottom: 15px;
+	border: 1px solid #ddd;
+	transition: background-color 0.3s ease;
+}
 
-    .address-item:hover {
-        background-color: #f1f1f1;
-    }
+.address-item:hover {
+	background-color: #f1f1f1;
+}
 
-    .address-frame {
-        display: flex;
-        align-items: center;
-    }
+.address-frame {
+	display: flex;
+	align-items: center;
+}
 
-    .address-radio {
-        margin-right: 10px;
-        width: 15px !important;
-        height: 15px !important;
-        border-radius: 50%;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
+.address-radio {
+	margin-right: 10px;
+	width: 15px !important;
+	height: 15px !important;
+	border-radius: 50%;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
 
-    .address-radio:checked {
-        background-color: #007bff;
-        border-color: #007bff;
-    }
+.address-radio:checked {
+	background-color: #007bff;
+	border-color: #007bff;
+}
 
-    .address-label {
-        cursor: pointer;
-        display: flex;
-        flex-direction: column;
-        font-size: 14px;
-        color: #333;
-    }
+.address-label {
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	font-size: 14px;
+	color: #333;
+}
 
-    .address-content p {
-        margin: 5px 0;
-    }
+.address-content p {
+	margin: 5px 0;
+}
 
-    .address-label:hover {
-        color: #007bff;
-    }
+.address-label:hover {
+	color: #007bff;
+}
 
-    .address-item hr {
-        border-top: 1px solid #eee;
-        margin: 10px 0;
-    }
+.address-item hr {
+	border-top: 1px solid #eee;
+	margin: 10px 0;
+}
 </style>
 
-							<%--                            <div class="col-lg-6">--%>
-							<%--                                <div class="checkout__input">--%>
-							<%--                                    <p>Fist Name<span>*</span></p>--%>
-							<%--                                    <input type="text">--%>
-							<%--                                </div>--%>
-							<%--                            </div>--%>
-							<%--                            <div class="col-lg-6">--%>
-							<%--                                <div class="checkout__input">--%>
-							<%--                                    <p>Last Name<span>*</span></p>--%>
-							<%--                                    <input type="text">--%>
-							<%--                                </div>--%>
-							<%--                            </div>--%>
 						</div>
 						<div class="checkout__input">
 							<p>Ghi chú</p>
 							<input type="text" placeholder="Lưu ý cho đơn hàng của bạn">
 						</div>
 						<div class="checkout__input">
-							<p>Phương thức thanh toán: COD</p>
+							<p>Phương thức thanh toán: Thanh toán khi nhận hàng (COD)</p>
 						</div>
 					</div>
 					<div class="col-lg-4 col-md-6">
@@ -204,7 +192,7 @@
 
 							</ul>
 							<div class="checkout__order__total">
-								Total <span>${totalAmount}</span>
+								Tổng cộng <span>${totalAmount}</span>
 							</div>
 
 							<button type="submit" class="site-btn">HOÀN THÀNH ĐƠN

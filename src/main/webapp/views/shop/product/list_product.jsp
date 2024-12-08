@@ -27,7 +27,7 @@
                         <th>ID</th>
                         <th>Ảnh SP</th>
                         <th>Sản phẩm</th>
-                        <th>Price</th>
+                        <th>Giá</th>
                         <th>Số lượng tồn</th>
                         <th>Danh mục</th>
                         <th>Hành động</th>

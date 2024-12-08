@@ -11,7 +11,7 @@
 		<form
 			action="${pageContext.request.contextPath}/shop/product/add-product"
 			method="post" enctype="multipart/form-data">
-			<input type="" name="shop" value="${shop}">
+			<input type="hidden" name="shop" value="${shop}">
 			<div class="form-group">
 				<label for="name">Tên Sản Phẩm</label> <input type="text" id="name"
 					name="name" class="form-control" required>

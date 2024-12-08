@@ -104,11 +104,18 @@ public class AccountModel extends BaseModel {
 		this.avatar = avatar;
 	}
 
-	public AccountModel(String name, String email, String code) {
-		super();
+	public AccountModel(String name, String email, String code, boolean isCodeBased) {
+		
 		this.name = name;
 		this.email = email;
 		this.code = code;
+	}
+
+	public AccountModel(String name, String phone, String email) {
+		
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
 	}
 
 	public AccountModel(String name, int id, String password, String email, boolean isSeller) {

@@ -259,6 +259,30 @@ public class ProductDaoImpl  implements IProductDao {
         }
         return products;
     }
+    
+    @Override
+	public List<ProductModel> searchProductsByName(String name) throws Exception {
+		List<ProductModel> products = new ArrayList<>();
+		String sql = "SELECT * FROM products WHERE name LIKE ? ORDER BY created_at DESC";
+
+		try (Connection connection = dbConnectSQL.getConnection();
+				PreparedStatement stmt = connection.prepareStatement(sql)) {
+			// Sử dụng wildcard để tìm kiếm tên chứa từ khóa
+			stmt.setString(1, "%" + name + "%");
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				ProductModel product = new ProductModel(rs.getInt("id"), rs.getString("name"),
+						rs.getString("description"), rs.getDouble("price"), rs.getInt("stock_quantity"),
+						rs.getInt("category_id"), rs.getInt("shop_id"));
+				products.add(product);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new Exception("Error while searching products by name", e);
+		}
+		return products;
+	}
 
 
 }

@@ -24,10 +24,10 @@
 					<div class="hero__search__form">
 						<form action="#">
 							<div class="hero__search__categories">
-								All Categories <span class="arrow_carrot-down"></span>
+								Tất cả danh mục <span class="arrow_carrot-down"></span>
 							</div>
-							<input type="text" placeholder="What do yo u need?">
-							<button type="submit" class="site-btn">SEARCH</button>
+							<input type="text" placeholder="Bạn cần tìm gì?">
+							<button type="submit" class="site-btn">TÌM KIẾM</button>
 						</form>
 					</div>
 					<div class="hero__search__phone">
@@ -36,7 +36,7 @@
 						</div>
 						<div class="hero__search__phone__text">
 							<h5>+65 11.188.888</h5>
-							<span>support 24/7 time</span>
+							<span>Hỗ trợ 24/7</span>
 						</div>
 					</div>
 				</div>
@@ -45,25 +45,6 @@
 	</div>
 </section>
 <!-- Hero Section End -->
-
-<!-- Breadcrumb Section Begin -->
-<%--<section class="breadcrumb-section set-bg" data-setbg="${URL}/img/breadcrumb.jpg">--%>
-<%--    <div class="container">--%>
-<%--        <div class="row">--%>
-<%--            <div class="col-lg-12 text-center">--%>
-<%--                <div class="breadcrumb__text">--%>
-<%--                    <h2>Vegetable’s Package</h2>--%>
-<%--                    <div class="breadcrumb__option">--%>
-<%--                        <a href="./index.html">Home</a>--%>
-<%--                        <a href="./index.html">Vegetables</a>--%>
-<%--                        <span>Vegetable’s Package</span>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</section>--%>
-<!-- Breadcrumb Section End -->
 
 <!-- Product Details Section Begin -->
 <section class="product-details spad">
@@ -84,12 +65,6 @@
 								src="${pageContext.request.contextPath}/image?fname=${image}"
 								alt="">
 						</c:forEach>
-						<%--                        <img data-imgbigurl="img/product/details/product-details-3.jpg"--%>
-						<%--                             src="img/product/details/thumb-2.jpg" alt="">--%>
-						<%--                        <img data-imgbigurl="img/product/details/product-details-5.jpg"--%>
-						<%--                             src="img/product/details/thumb-3.jpg" alt="">--%>
-						<%--                        <img data-imgbigurl="img/product/details/product-details-4.jpg"--%>
-						<%--                             src="img/product/details/thumb-4.jpg" alt="">--%>
 					</div>
 				</div>
 			</div>
@@ -99,9 +74,11 @@
 					<div class="product__details__rating">
 						<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 							class="fa fa-star"></i> <i class="fa fa-star"></i> <i
-							class="fa fa-star-half-o"></i> <span>(18 reviews)</span>
+							class="fa fa-star-half-o"></i> <span>(${countReview} đánh
+							giá)</span>
 					</div>
-					<div class="product__details__price">${product.price}</div>
+
+					<div class="product__details__price">${product.price}VNĐ</div>
 					<form action="${pageContext.request.contextPath}/cart/add"
 						method="post">
 						<input type="hidden" name="productId" value="${product.id}">
@@ -112,15 +89,17 @@
 								</div>
 							</div>
 						</div>
-						<button type="submit" class="primary-btn">ADD TO CARD</button>
+						<button type="submit" class="primary-btn">THÊM VÀO GIỎ
+							HÀNG</button>
 					</form>
 					<a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
 					<ul>
-						<li><b>Availability</b> <span>${product.stockQuantity}</span></li>
-						<li><b>Shipping</b> <span>01 day shipping. <samp>Free
-									pickup today</samp></span></li>
-						<li><b>Weight</b> <span>0.5 kg</span></li>
-						<li><b>Share on</b>
+						<li><b>Sẵn có</b> <span>${product.stockQuantity}</span></li>
+						<li><b>Thời gian vận chuyển</b> <span>01 ngày kể từ
+								lúc xác nhận. <br> <samp>Nhận hàng miễn phí hôm nay</samp>
+						</span></li>
+						<li><b>Cân nặng</b> <span>0.5 kg</span></li>
+						<li><b>Chia sẻ</b>
 							<div class="share">
 								<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
 									class="fa fa-twitter"></i></a> <a href="#"><i
@@ -134,13 +113,13 @@
 				<div class="product__details__tab">
 					<ul class="nav nav-tabs" role="tablist">
 						<li class="nav-item"><a class="nav-link active"
-							data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">Description</a>
-						</li>
+							data-toggle="tab" href="#tabs-1" role="tab" aria-selected="true">Mô
+								tả</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#tabs-2" role="tab" aria-selected="false">Information</a></li>
+							href="#tabs-2" role="tab" aria-selected="false">Thông tin
+								shop</a></li>
 						<li class="nav-item"><a class="nav-link" data-toggle="tab"
-							href="#tabs-3" role="tab" aria-selected="false">Reviews <span></span></a>
-						</li>
+							href="#tabs-3" role="tab" aria-selected="false">Đánh giá</a></li>
 					</ul>
 					<div class="tab-content">
 						<!-- Tab 1: Thông tin sản phẩm -->
@@ -154,10 +133,16 @@
 						<!-- Tab 2: Products Information -->
 						<div class="tab-pane fade" id="tabs-2" role="tabpanel">
 							<div class="product__details__tab__desc">
-								<h6>Products Information</h6>
-								<p>Vestibulum ac diam sit amet quam vehicula elementum sed
-									sit amet dui. Pellentesque in ipsum id orci porta dapibus.
-									Proin</p>
+								<h3>Thông tin shop</h3>
+								<p>
+									<strong>Tên Shop:</strong> ${shop.name}
+								</p>
+								<p>
+									<strong>Địa Chỉ:</strong> ${shop.address}
+								</p>
+								<p>
+									<strong>Mô Tả:</strong> ${shop.description}
+								</p>
 							</div>
 						</div>
 
@@ -165,21 +150,31 @@
 						<div class="tab-pane fade" id="tabs-3" role="tabpanel">
 							<div class="product__details__tab__desc">
 								<c:forEach var="review" items="${reviews}">
-									<div class="review-box">
-										<div class="review-header">
-											<h5 class="author-name">${review.authorName}
-												<span class="review-date">(${review.createdAt})</span>
+									<div class="review-box"
+										style="border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 5px;">
+										<div class="review-header" style="margin-bottom: 10px;">
+											<h5 class="author-name"
+												style="margin: 0; font-size: 16px; font-weight: bold;">
+												${review.authorName} <span class="review-date"
+													style="font-size: 12px; color: #888;">
+													(${review.createdAt}) </span>
 											</h5>
 										</div>
-										<div class="review-content">
+										<div class="review-content"
+											style="font-size: 14px; color: #333;">
 											<p>${review.content}</p>
 										</div>
 									</div>
 								</c:forEach>
+
+								<!-- Hiển thị thông báo nếu chưa có đánh giá -->
+								<c:if test="${empty reviews}">
+									<p style="text-align: center; color: #888; font-size: 14px;">Chưa
+										có đánh giá nào cho sản phẩm này.</p>
+								</c:if>
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>

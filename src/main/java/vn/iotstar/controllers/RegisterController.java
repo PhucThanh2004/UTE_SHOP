@@ -95,7 +95,7 @@ public class RegisterController extends HttpServlet {
 	        String code = String.format("%06d", (int) (Math.random() * 1000000));
 
 	        // Tạo đối tượng AccountModel
-	        AccountModel user = new AccountModel(name, email, code);
+	        AccountModel user = new AccountModel(name, email, code,true);
 
 	        // Gọi phương thức để lưu tài khoản vào database và cập nhật mã xác nhận
 	        boolean isSuccess = userService.register(email, password, name, phone, null, null, code);

@@ -8,12 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import vn.iotstar.models.CategoryModel;
 import vn.iotstar.models.ProductModel;
 import vn.iotstar.models.ReviewModel;
+import vn.iotstar.models.ShopModel;
 import vn.iotstar.service.ICategoryService;
 import vn.iotstar.service.IProductService;
 import vn.iotstar.service.IReviewService;
+import vn.iotstar.service.IShopService;
 import vn.iotstar.service.impl.CategoryServiceImpl;
 import vn.iotstar.service.impl.ProductServiceImpl;
 import vn.iotstar.service.impl.ReviewServiceImpl;
+import vn.iotstar.service.impl.ShopServiceImpl;
 import vn.iotstar.utils.Constant;
 
 import java.io.IOException;
@@ -26,12 +29,14 @@ public class ProductDetailController extends HttpServlet {
     private IProductService productService;
     private ICategoryService categoryService;
     private IReviewService reviewService;
+    private IShopService shopService;
 
     @Override
     public void init() throws ServletException {
         productService = new ProductServiceImpl();
         categoryService = new CategoryServiceImpl();
-        reviewService = new ReviewServiceImpl(); // Khởi tạo ReviewService
+        reviewService = new ReviewServiceImpl(); 
+        shopService = new ShopServiceImpl();
 
     }
 
@@ -42,14 +47,20 @@ public class ProductDetailController extends HttpServlet {
 
             categoryService = new CategoryServiceImpl();
             List<CategoryModel> categories = categoryService.getCategories();
+            int countReview = reviewService.countReview(productId);
 
             req.setAttribute("categories", categories);
 
             ProductModel product = productService.getProductById(productId);
             req.setAttribute("product", product);
             
+            int shopId = product.getShopId();
+            ShopModel shop = shopService.findByShopId(shopId);
+            
             List<ReviewModel> reviews = reviewService.getReviewsWithAuthorByProductId(productId);
             req.setAttribute("reviews", reviews); 
+            req.setAttribute("shop", shop); 
+            req.setAttribute("countReview", countReview);
 
             req.getRequestDispatcher(Constant.USER_PRODUCT_DETAIL).forward(req, resp);
         }catch (Exception e) {

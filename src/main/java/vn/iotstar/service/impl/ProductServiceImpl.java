@@ -54,4 +54,9 @@ public class ProductServiceImpl implements IProductService {
     public List<ProductModel> getProductsNew(int limit) throws Exception {
         return productDao.getProductsNew(limit);
     }
+    
+    @Override
+	public List<ProductModel> searchProductsByName(String name) throws Exception {
+		return productDao.searchProductsByName(name);
+	}
 }

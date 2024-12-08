@@ -8,8 +8,8 @@
     <div class="card-body">
         <form action="${pageContext.request.contextPath}/shop/product/edit" method="post" enctype="multipart/form-data">
             <!-- Input ID sản phẩm (ẩn) -->
-            <input type="" name="shopId" value="${shop}" />
-            <input type="" name="id" value="${product.id}" />
+            <input type="hidden" name="shopId" value="${shop}" />
+            <input type="hidden" name="id" value="${product.id}" />
 
             <div class="form-group">
                 <label for="name">Tên Sản Phẩm</label>
