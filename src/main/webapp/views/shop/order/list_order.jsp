@@ -45,8 +45,11 @@
                         <td>${order.accountEmail}</td>
                         <td>${order.totalAmount}</td>
                         <td>
+                        <c:set var="shopId" value="${param.shopId}" />
+                        
                             <form action="${pageContext.request.contextPath}/shop/orders/update-status" method="post">
                                 <input type="hidden" name="orderId" value="${order.orderId}">
+                                <input type="hidden" name="shopId" value="${shopId}">
                                 <select name="status" class="form-control" onchange="this.form.submit()">
                                     <option value="PENDING" ${order.status == 'PENDING' ? 'selected' : ''}>Chờ xác nhận</option>
                                     <option value="ACCEPT" ${order.status == 'ACCEPT' ? 'selected' : ''}>Đã xác nhận</option>

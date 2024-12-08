@@ -16,6 +16,7 @@ public class UpdateOrderStatusController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         orderService = new OrderServiceImpl();
+        int shopId = Integer.parseInt(request.getParameter("shopId"));
         int orderId = Integer.parseInt(request.getParameter("orderId"));
         String status = request.getParameter("status");
 
@@ -23,7 +24,7 @@ public class UpdateOrderStatusController extends HttpServlet {
             orderService.updateOrderStatus(orderId, status);
             request.getSession().setAttribute("message", "Cập nhật trạng thái đơn hàng thành công!");
 
-            response.sendRedirect(request.getContextPath() + "/shop/orders");
+            response.sendRedirect(request.getContextPath() + "/shop/orders?shopId="+shopId);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Cập nhật trạng thái không thành công.");

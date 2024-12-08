@@ -37,6 +37,7 @@ public class EditProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+        	int shopId = Integer.parseInt(req.getParameter("shopId"));
             int productId = Integer.parseInt(req.getParameter("id"));
 
             productService = new ProductServiceImpl();
@@ -47,6 +48,7 @@ public class EditProductController extends HttpServlet {
 
             req.setAttribute("product", product);
             req.setAttribute("categories", categories);
+            req.setAttribute("shop", shopId);
 
             req.getRequestDispatcher(Constant.SHOP_EDIT_PRODUCT).forward(req, resp);
 
@@ -58,6 +60,7 @@ public class EditProductController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
+        	int shopId = Integer.parseInt(req.getParameter("shopId"));
             int id = Integer.parseInt(req.getParameter("id"));
             String name = req.getParameter("name");
             String description = req.getParameter("description");
@@ -103,7 +106,7 @@ public class EditProductController extends HttpServlet {
             }
 
             req.getSession().setAttribute("message", "Cập nhật sản phẩm thành công!");
-            resp.sendRedirect(req.getContextPath() + "/shop/product/list-product");
+            resp.sendRedirect(req.getContextPath() + "/shop/product/list-product?id="+ shopId);
         } catch (Exception e) {
             req.getSession().setAttribute("error", "Cập nhật sản phẩm thất bại!");
             resp.sendRedirect(req.getContextPath() + "/shop/product/list-product");

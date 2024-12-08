@@ -49,8 +49,8 @@
                             <td>${product.stockQuantity}</td>
                             <td>${product.categoryId}</td>
                             <td>
-                                <a href="${pageContext.request.contextPath}/shop/product/edit?id=${product.id}" class="btn btn-info">Sửa</a>
-                                <a href="${pageContext.request.contextPath}/shop/product/delete?id=${product.id}"
+                                <a href="${pageContext.request.contextPath}/shop/product/edit?id=${product.id}&shopId=${shop}" class="btn btn-info">Sửa</a>
+                                <a href="${pageContext.request.contextPath}/shop/product/delete?id=${product.id}&shopId=${shop}"
                                    class="btn btn-danger"
                                    onclick="return confirm('Bạn có chắc chắn muốn xóa sản phẩm này?');">
                                     Xóa

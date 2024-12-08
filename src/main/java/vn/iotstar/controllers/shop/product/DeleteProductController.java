@@ -43,9 +43,10 @@ public class DeleteProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
+        	int shopId = Integer.parseInt(req.getParameter("shopId")); 
             int productId = Integer.parseInt(req.getParameter("id")); // Lấy productId từ URL
             boolean isDeleted = productService.deleteProduct(productId);
-            int shopId = Integer.parseInt(req.getParameter("id"));
+            
 
             if (isDeleted) {
                 req.getSession().setAttribute("message", "Xóa sản phẩm thành công!");

@@ -25,7 +25,7 @@ public class ListOrderController extends HttpServlet {
         orderService = new OrderServiceImpl();
         int shopId;
         try {
-            shopId = 4;
+            shopId = Integer.parseInt(request.getParameter("shopId"));
         } catch (NumberFormatException e) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid shop ID");
             return;
