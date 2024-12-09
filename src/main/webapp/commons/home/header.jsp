@@ -104,7 +104,7 @@
 				<li class="active"><a
 					href="${pageContext.request.contextPath}/home">Home</a></li>
 				<li><a href="${pageContext.request.contextPath}/home">Shop</a></li>
-				<li><a href="${pageContext.request.contextPath}/home">Blog</a></li>
+				
 				</li>
 				<c:choose>
 					<c:when test="${not empty sessionScope.account}">
@@ -225,7 +225,7 @@
 								href="${pageContext.request.contextPath}/home">Home</a></li>
 
 
-							<li><a href="${pageContext.request.contextPath}/home">Blog</a></li>
+							
 							</li>
 							<c:choose>
 								<c:when test="${not empty sessionScope.account}">
