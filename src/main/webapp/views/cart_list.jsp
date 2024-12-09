@@ -84,9 +84,11 @@
                             <tbody>
                                 <c:forEach var="cart" items="${carts}">
                                     <tr>
+                                   
                                         <td class="shoping__cart__item">
                                             <img width="50px" src="${pageContext.request.contextPath}/image?fname=${cart.productImage}" alt="">
                                             <h5>${cart.productName}</h5>
+                                            <input type="hidden" name="cartDetailId" value="${cart.cartDetailId}" >
                                         </td>
                                         <td class="shoping__cart__price">${cart.productPrice}</td>
                                         <td class="shoping__cart__quantity">
@@ -98,7 +100,7 @@
                                         </td>
                                         <td class="shoping__cart__total">${cart.productPrice * cart.quantity}</td>
                                         <td class="shoping__cart__item__close">
-                                            <a href="${pageContext.request.contextPath}/cart/delete?id=${cart.cartDetailId}" class="icon_close"></a>
+                                            <a href="${pageContext.request.contextPath}/cart/delete?cartDetailId=${cart.cartDetailId}" class="icon_close"></a>
                                         </td>
                                     </tr>
                                 </c:forEach>

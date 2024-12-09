@@ -171,11 +171,15 @@
 																		alt="${detail.product.name}" width="50">
 																</c:if></td>
 															<td>
-																<!-- Nút mở Modal -->
-																<button type="button" class="btn btn-sm btn-success"
-																	data-toggle="modal"
-																	data-target="#reviewModal${detail.product.id}">
-																	Đánh giá</button>
+																<!-- Hiển thị nút đánh giá nếu trạng thái đơn hàng là "Đã giao hàng" -->
+																<c:if test="${order.status == 'DONE'}">
+																	<!-- Nút mở Modal -->
+																	<button type="button" class="btn btn-sm btn-success"
+																		data-toggle="modal"
+																		data-target="#reviewModal${detail.product.id}">
+																		Đánh giá</button>
+																</c:if>
+																
 															</td>
 														</tr>
 														<div class="modal fade"

@@ -16,7 +16,7 @@ import vn.iotstar.utils.Constant;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/cart/view"})
+@WebServlet(urlPatterns = {"/cart/view", "/cart/delete"})
 public class ListCartController extends HttpServlet {
     private ICartService cartService;
 
@@ -26,7 +26,11 @@ public class ListCartController extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
+    	req.setCharacterEncoding("UTF-8");
+		resp.setCharacterEncoding("UTF-8");
+		String url = req.getRequestURI();
+		if (url.contains("/cart/view")) {
+    	try {
         	HttpSession session = req.getSession();
        	 AccountModel account = (AccountModel) session.getAttribute("account"); 
        	 int accountId = account.getId(); 
@@ -51,5 +55,20 @@ public class ListCartController extends HttpServlet {
             e.printStackTrace();
             resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error adding to cart.");
         }
+		}if (url.contains("/cart/delete"))
+		{
+			int cartDetailId = Integer.parseInt(req.getParameter("cartDetailId"));
+			try {
+				cartService.deleteCartDetail(cartDetailId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			resp.sendRedirect(req.getContextPath()+"/cart/view");
+			
+		}
+		
+        
+        
     }
 }

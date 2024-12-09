@@ -57,7 +57,7 @@ public class RegisterShopController extends HttpServlet {
 
             shopService.registerShop(newShop);
 
-            resp.sendRedirect(req.getContextPath() + "/shop");
+            resp.sendRedirect(req.getContextPath() + "/shop/product/list-product?id="+accountId);
         } catch (Exception e) {
             e.printStackTrace();
         }

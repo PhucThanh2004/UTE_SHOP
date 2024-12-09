@@ -133,7 +133,7 @@
 						<!-- Tab 2: Products Information -->
 						<div class="tab-pane fade" id="tabs-2" role="tabpanel">
 							<div class="product__details__tab__desc">
-								<h3>Thông tin shop</h3>
+								
 								<p>
 									<strong>Tên Shop:</strong> ${shop.name}
 								</p>

@@ -11,4 +11,5 @@ public interface ICartService {
     List<CartDetailWithProduct> getCartDetailsWithProducts(int cartId) throws Exception;
     CartModel findCartByAccountId(int accountId) throws Exception;
     void updateCart(int cartId, Map<Integer, Integer> updatedQuantities) throws Exception;
+    void deleteCartDetail(int cartDetailId) throws Exception;
 }

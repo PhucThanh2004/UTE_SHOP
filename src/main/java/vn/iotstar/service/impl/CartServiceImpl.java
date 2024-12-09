@@ -56,4 +56,10 @@ public class CartServiceImpl implements ICartService {
             cartDao.updateCartDetail(cartDetailId, quantity);
         }
     }
+
+	@Override
+	public void deleteCartDetail(int cartDetailId) throws Exception {
+		cartDao.deleteCartDetail(cartDetailId);
+		
+	}
 }
